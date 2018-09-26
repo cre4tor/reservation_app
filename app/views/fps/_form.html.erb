@@ -1,0 +1,37 @@
+<%= form_with(model: fp, local: true) do |form| %>
+  <% if fp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(fp.errors.count, "error") %> prohibited this fp from being saved:</h2>
+
+      <ul>
+      <% fp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :fp_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :fp_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :fp_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_id %>
+    <%= form.number_field :account_id, id: :fp_account_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

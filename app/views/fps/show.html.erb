@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @fp.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @fp.last_name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @fp.user_id %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @fp.account_id %>
+</p>
+
+<%= link_to 'Edit', edit_fp_path(@fp) %> |
+<%= link_to 'Back', fps_path %>
