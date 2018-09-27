@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180926092842) do
+ActiveRecord::Schema.define(version: 20180926094157) do
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "user_id"
-    t.integer "account_id"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.integer "user_id", null: false
+    t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_clients_on_account_id"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20180926092842) do
   end
 
   create_table "fps", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "user_id"
-    t.integer "account_id"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.integer "user_id", null: false
+    t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_fps_on_account_id"
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(version: 20180926092842) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.string "email"
+    t.string "name", null: false
+    t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
 end
