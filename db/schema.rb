@@ -15,10 +15,12 @@ ActiveRecord::Schema.define(version: 20180926094157) do
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.string "email", null: false
     t.integer "user_id", null: false
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
@@ -26,20 +28,19 @@ ActiveRecord::Schema.define(version: 20180926094157) do
   create_table "fps", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.string "email", null: false
     t.integer "user_id", null: false
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
     t.index ["account_id"], name: "index_fps_on_account_id"
     t.index ["user_id"], name: "index_fps_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name", null: false
-    t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
-  end
+    end
 
 end
