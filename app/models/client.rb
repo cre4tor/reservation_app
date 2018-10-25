@@ -1,4 +1,5 @@
 class Client < ApplicationRecord
+  before_save { self.email = email.downcase }
   belongs_to :user
 
   def name
