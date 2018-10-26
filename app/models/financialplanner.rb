@@ -1,0 +1,2 @@
+class Financialplanner < ApplicationRecord
+end
