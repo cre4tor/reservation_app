@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_save { self.email = email.downcase }
   has_one :financial_planner, dependent: :destroy
   accepts_nested_attributes_for :financial_planner, allow_destroy: true
   has_one :client, dependent: :destroy
