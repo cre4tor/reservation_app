@@ -5,6 +5,6 @@ class CreateClients < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :clients, :user_id
+    add_index :clients, :user_id, unique: true
   end
 end

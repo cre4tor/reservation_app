@@ -5,6 +5,6 @@ class CreateFinancialPlanners < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :financial_planners, :user_id
+    add_index :financial_planners, :user_id, unique: true
   end
 end
