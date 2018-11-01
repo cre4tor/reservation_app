@@ -10,7 +10,8 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 31 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true,
-                    length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
+                    length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX },
+                    confirmation: {case_sensitive: false}
                         
   def full_name
     "#{first_name} #{last_name}"
