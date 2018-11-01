@@ -1,2 +1,0 @@
-class Financialplanner < ApplicationRecord
-end
