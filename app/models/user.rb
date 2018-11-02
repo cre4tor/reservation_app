@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token
   before_save { self.email = email.downcase }
   has_one :financial_planner, dependent: :destroy
   accepts_nested_attributes_for :financial_planner, allow_destroy: true
@@ -16,5 +17,14 @@ class User < ApplicationRecord
                         
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
 end
