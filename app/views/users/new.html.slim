@@ -14,6 +14,8 @@
       = f.password_field :password, class: 'form-control'
       = f.label :password_confirmation, "Confirmation"
       = f.password_field :password_confirmation, class: 'form-control'
-      = radio_button :financial_planner "フィナンシャルプランナー" 1,
-      = radio_button :client "一般ユーザー" 1,
+      = radio_button_tag 'type', 'financial_planner'
+      | フィナンシャルプランナー
+      = radio_button_tag 'type', 'client'
+      | 一般ユーザー
       = f.submit "Create my account", class: "btn btn-primary"
