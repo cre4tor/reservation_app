@@ -6,20 +6,20 @@ class User < ApplicationRecord
   has_one :client, dependent: :destroy
   accepts_nested_attributes_for :client, allow_destroy: true
   has_secure_password validations: true
-  
-  validates :password, presence: true, length: {minimum: 6}
+
+  validates :password, presence: true, length: { minimum: 6 }
   validates :first_name, presence: true, length: { maximum: 15 }
-  validates :last_name, presence: true, length: {maximum: 15}
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :last_name, presence: true, length: { maximum: 15 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, uniqueness: true,
                     length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX },
-                    confirmation: {case_sensitive: false}
-                        
+                    confirmation: { case_sensitive: false }
+
   def full_name
     "#{first_name} #{last_name}"
   end
 
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -30,6 +30,7 @@ class User < ApplicationRecord
 
   def authentiated?(remember_token)
     return false if remember_digest.nil?
+
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
