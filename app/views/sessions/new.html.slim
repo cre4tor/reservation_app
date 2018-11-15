@@ -1,4 +1,4 @@
-- provide(:title, "Log in")
+- provide(:title, 'Log in')
 h1
   | Log in
 .row
@@ -8,7 +8,7 @@ h1
       = f.email_field :email, class: 'form-control'
       = f.label :password
       = f.password_field :password, class: 'form-control'
-      = f.submit "Log in", class: "btn btn-primary"
+      = f.submit 'Log in', class: 'btn btn-primary'
     p
       | New user?
-      = link_to "Sign up now!", signup_path
+      = link_to 'Sign up now!', signup_path
