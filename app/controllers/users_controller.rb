@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.client.build
+    @user.financial_planner.build
   end
 
   def create
