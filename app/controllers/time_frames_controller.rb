@@ -1,5 +1,7 @@
 class TimeFramesController < ApplicationController
   def new
+    @time_frame = TimeFrame.new
+
     #配列を生成
     @weekday_start_time_array = []
     @saturday_start_time_array = []
