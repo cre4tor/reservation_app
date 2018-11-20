@@ -39,4 +39,14 @@ module SessionsHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
+
+  #financial_plannerであればtrue,その他ならfalseを返す
+  def financial_plannner?
+    !@current_user.financial_planner_id.nil?
+  end
+
+  #clientであればtrue,その他ならfalseを返す
+  def client?
+    !@current_user.client_id.nil?
+  end
 end
