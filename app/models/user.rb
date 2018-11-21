@@ -37,4 +37,14 @@ class User < ApplicationRecord
   def forget
     update_attributes(remember_digest: nil)
   end
+
+  #financial_plannerであればtrue,その他ならfalseを返す
+  def User.financial_planner?
+    !current_user.financial_planner.nil?
+  end
+
+  #clientであればtrue,その他ならfalseを返す
+  def User.client?
+    !current_user.client.nil?
+  end
 end
