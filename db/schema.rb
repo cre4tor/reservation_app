@@ -32,17 +32,17 @@ ActiveRecord::Schema.define(version: 20181120064347) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_reservations_on_client_id"
-    t.index ["time_frame_id"], name: "index_reservations_on_time_frame_id"
+    t.index ["time_frame_id"], name: "index_reservations_on_time_frame_id", unique: true
   end
 
   create_table "time_frames", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.time "start_time"
-    t.time "end_time"
+    t.time "start_time", unique: true
+    t.time "end_time", unique: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "financial_planner_id"
     t.date "reservation_date"
-    t.index ["financial_planner_id"], name: "index_time_frames_on_financial_planner_id"
+    t.index ["financial_planner_id"], name: "index_time_frames_on_financial_planner_id", unique: true
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
