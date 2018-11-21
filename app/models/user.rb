@@ -19,6 +19,12 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+               BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end
@@ -39,12 +45,12 @@ class User < ApplicationRecord
   end
 
   #financial_plannerであればtrue,その他ならfalseを返す
-  def User.financial_planner?
+  def self.financial_planner?
     !current_user.financial_planner.nil?
   end
 
   #clientであればtrue,その他ならfalseを返す
-  def User.client?
+  def self.client?
     !current_user.client.nil?
   end
 end
