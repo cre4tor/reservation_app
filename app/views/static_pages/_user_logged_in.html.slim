@@ -2,5 +2,5 @@
   aside.col-md-4
     section.user_info
       = render 'user_info'
-  - if financial_planner?
-    = link_to "Create ReservationFrame", time_frames_new_path, class: "btn btn-lg btn-primary"
+  - if User.financial_planner?
+    = link_to "Create ReservationFrame", new_time_frame_path, class: "btn btn-lg btn-primary"
