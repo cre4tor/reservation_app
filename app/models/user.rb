@@ -45,14 +45,12 @@ class User < ApplicationRecord
   end
 
   #financial_plannerであればtrue,その他ならfalseを返す
-  def self.financial_planner?
-    user = ApplicationController.helpers.current_user
-    !user.financial_planner.nil?
+  def financial_planner?
+    !financial_planner.nil?
   end
 
   #clientであればtrue,その他ならfalseを返す
-  def self.client?
-    user = ApplicationController.helpers.current_user
-    !user.client.nil?
+  def client?
+    !client.nil?
   end
 end
