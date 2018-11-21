@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'time_frames/new'
-
   root 'static_pages#home'
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
