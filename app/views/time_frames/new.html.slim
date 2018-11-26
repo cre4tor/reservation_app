@@ -12,7 +12,7 @@
     .firstBlock
       = form_for(@time_frame, url: new_time_frame_path) do |f|
         = f.label '予約日'
-        = f.text_field :reservation_date, required: true
+        = f.text_field :reservation_date, id: 'weekday'
         | 開始時間
         = f.select :start_time, @weekday_start_time_array
         = f.submit 'Reservation', class: 'btn btn-primary'
@@ -21,7 +21,7 @@
     .secondBlock
       = form_for(@time_frame, url: new_time_frame_path) do |f|
         = f.label '予約日'
-        = f.text_field :reservation_date
+        = f.text_field :reservation_date, id: 'saturday'
         | 開始時間
         = f.select :start_time, @saturday_start_time_array
         = f.submit 'Reservation', class: 'btn btn-primary'
@@ -41,3 +41,25 @@ div[data-turbolinks="false"]
             document.querySelector('.secondBlock').style.display = "";
         });
     }, false);
+
+  javascript:
+    $(document).ready(function () {
+        $('#weekday').datepicker({
+            format: 'yyyy-mm-dd',
+            pickTime: false,
+            startDate: Date(),
+            endDate: '0d',
+            daysOfWeekDisabled: '06',
+        });
+    });
+
+  javascript:
+    $(document).ready(function(){
+        $('#saturday').datepicker({
+            format: 'yyyy-mm-dd',
+            pickTime: false,
+            startdate: Date(),
+            enddate: '+2y',
+            daysOfWeekDisabled: '012345',
+        });
+    });
