@@ -42,24 +42,28 @@ div[data-turbolinks="false"]
         });
     }, false);
 
-  javascript:
     $(document).ready(function () {
         $('#weekday').datepicker({
-            format: 'yyyy-mm-dd',
-            pickTime: false,
-            startDate: Date(),
-            endDate: '0d',
-            daysOfWeekDisabled: '06',
+            dateFormat: 'yy-mm-dd',
+            defaultDate: '0',
+            maxDate: '+1y',
+            minDate: '0',
+            beforeShowDay: function (date) {
+                var disableDate = [date.getDay() != 0, date.getDay() != 6];
+                return disableDate;
+            }
         });
     });
 
-  javascript:
     $(document).ready(function(){
         $('#saturday').datepicker({
-            format: 'yyyy-mm-dd',
-            pickTime: false,
-            startdate: Date(),
-            enddate: '+2y',
-            daysOfWeekDisabled: '012345',
+            dateFormat: 'yy-mm-dd',
+            defaultDate: '0',
+            maxDate: '+1y',
+            minDate: '0',
+            beforeShowDay: function (date) {
+              var disableDate = [date.getDay() == 6];
+              return disableDate;
+            }
         });
     });
