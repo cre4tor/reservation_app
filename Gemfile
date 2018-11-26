@@ -7,6 +7,9 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+#install jquery
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 #Use DateTimePicker
 gem 'momentjs-rails', '~> 2.9', :github => 'derekprior/momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
