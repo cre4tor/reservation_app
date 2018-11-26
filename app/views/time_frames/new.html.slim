@@ -1,2 +1,43 @@
-h1 TimeFrames#new
-p Find me in app/views/time_frames/new.html.slim
+= provide(:title, "Create Reservation")
+
+
+  = radio_button_tag 'select_datetime', 'weekday', true, class: 'radio_button'
+  | 平日
+  = radio_button_tag 'select_datetime', 'saturday', false, class:'radio_button'
+  | 土曜日
+
+
+.row
+  .col-md-6.col-md-offset-3
+    .firstBlock
+      = form_for(@time_frame, url: new_time_frame_path) do |f|
+        = f.label '予約日'
+        = f.text_field :reservation_date, required: true
+        | 開始時間
+        = f.select :start_time, @weekday_start_time_array
+        = f.submit 'Reservation', class: 'btn btn-primary'
+.row
+  .col-md-6.col-md-offset-3
+    .secondBlock
+      = form_for(@time_frame, url: new_time_frame_path) do |f|
+        = f.label '予約日'
+        = f.text_field :reservation_date
+        | 開始時間
+        = f.select :start_time, @saturday_start_time_array
+        = f.submit 'Reservation', class: 'btn btn-primary'
+
+div[data-turbolinks="false"]
+  javascript:
+    document.querySelector('.secondBlock').style.display = 'none';
+    $(document).ready(function(){
+        var button1 = document.getElementById("select_datetime_weekday");
+        var button2 = document.getElementById("select_datetime_saturday");
+        button1.addEventListener('click', function(){
+            document.querySelector('.firstBlock').style.display = "";
+            document.querySelector('.secondBlock').style.display = "none";
+        });
+        button2.addEventListener('click', function(){
+            document.querySelector('.firstBlock').style.display = "none";
+            document.querySelector('.secondBlock').style.display = "";
+        });
+    }, false);
