@@ -15,13 +15,14 @@ class TimeFramesController < ApplicationController
   end
 
   def create
-    @time_frame = @financial_planner.time_frames.build(time_frame_params)
+    @financial_planner = FinancialPlanner.find_by(id: @current_user)
+    @time_frame = @financial_planner.time_frames.new(time_frame_params)
     if @time_frame.save
-      flash.now[:success] = "Reservation success!"
-      redirect_to @current_user
+      flash[:success] = "Time set completed!"
+      redirect_to current_user
     else
-      flash.now[:danger] = "Reservation failed..."
-      render 'new'
+      flash[:danger] = "Reservation failed..."
+      redirect_to new_time_frame_path
     end
   end
 
@@ -39,7 +40,7 @@ class TimeFramesController < ApplicationController
   private
 
     def time_frame_params
-      params.require(:time_frame).permit(:reservation_date, :start_time, :end_time)
+      params.require(:time_frame).permit(:reservation_date, :start_time)
     end
 
   end
