@@ -19,7 +19,7 @@ class TimeFramesController < ApplicationController
     @time_frame = @financial_planner.time_frames.new(time_frame_params)
     if @time_frame.save
       flash[:success] = "Time set completed!"
-      redirect_to current_user
+      redirect_to new_reservation_path
     else
       flash[:danger] = "Reservation failed..."
       redirect_to new_time_frame_path
