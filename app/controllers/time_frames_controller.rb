@@ -40,12 +40,7 @@ class TimeFramesController < ApplicationController
   private
 
     def end_time
-      time = params.require(:time_frame).permit(:start_time).to_s
-      #time = {"start_time"=>"10:00:00"}
-      tmp = time.match(/([0-9]+:)[0-9]+/)
-      puts tmp
-      #tmp = 10:00
-      Tod::TimeOfDay.parse(tmp) + 30.minutes
+      Time.parse(params[:time_frame][:start_time]) + 30.minutes
     end
 
     def time_frame_params
