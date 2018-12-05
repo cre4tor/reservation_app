@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181205064128) do
+ActiveRecord::Schema.define(version: 20181205093909) do
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20181205064128) do
     t.integer "time_frame_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
     t.index ["client_id"], name: "index_reservations_on_client_id"
     t.index ["time_frame_id"], name: "index_reservations_on_time_frame_id"
   end
