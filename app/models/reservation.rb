@@ -1,4 +1,4 @@
 class Reservation < ApplicationRecord
-  belongs_to :time_frame
-  belongs_to :client
+  belongs_to :time_frame, optional: true
+  belongs_to :client, optional: true
 end
