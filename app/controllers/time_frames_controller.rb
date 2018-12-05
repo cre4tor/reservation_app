@@ -17,9 +17,10 @@ class TimeFramesController < ApplicationController
   def create
     @financial_planner = FinancialPlanner.find_by(id: @current_user)
     @time_frame = @financial_planner.time_frames.new(time_frame_params)
-    if @time_frame.save
-      flash[:success] = "Time set completed!"
-      redirect_to new_reservation_path
+    @reservation = @time_frame.build_reservation
+    if @reservation.save
+      flash[:success] = "Reservation SUCCESS!"
+      redirect_to current_user
     else
       flash[:danger] = "Reservation failed..."
       redirect_to new_time_frame_path
