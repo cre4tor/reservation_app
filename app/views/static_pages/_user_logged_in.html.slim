@@ -5,4 +5,4 @@
   - if current_user.financial_planner?
     = link_to "Create ReservationFrame", new_time_frame_path, class: "btn btn-lg btn-primary"
   - if current_user.client?
-    = link_to "Reservation now", show_time_frame_path, class: "btn btn-lg btn-primary"
+    = link_to "Reservation now", new_reservation_path, class: "btn btn-lg btn-primary"
