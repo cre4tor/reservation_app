@@ -18,18 +18,18 @@ class TimeFramesController < ApplicationController
     financial_planner = current_user.financial_planner
     @time_frame = financial_planner.time_frames.new(time_frame_params)
     if @time_frame.save
-      redirect_to current_user , success: "Reservation frame set completed!"
+      redirect_to current_user , success: 'Reservation frame set completed!'
     else
-      redirect_to new_time_frame_path, danger: "Reservation failed..."
+      redirect_to new_time_frame_path, danger: 'Reservation failed...'
     end
   end
 
   def logged_in_financial_planner
     unless logged_in?
-      redirect_to login_url, danger: "Please log in"
+      redirect_to login_url, danger: 'Please log in'
     end
     unless current_user.financial_planner?
-      redirect_to @current_user, danger: "Permission denied"
+      redirect_to @current_user, danger: 'Permission denied'
     end
   end
 
