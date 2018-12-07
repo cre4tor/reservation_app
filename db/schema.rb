@@ -27,12 +27,11 @@ ActiveRecord::Schema.define(version: 20181205093909) do
   end
 
   create_table "reservations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "client_id"
-    t.integer "time_frame_id"
+    t.integer "client_id", null: false
+    t.integer "time_frame_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_reservations_on_client_id"
-    t.index ["time_frame_id"], name: "index_reservations_on_time_frame_id"
+    t.index ["time_frame_id", "client_id"], name: "index_reservations_on_time_frame_id", unique: true
   end
 
   create_table "time_frames", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -40,9 +39,9 @@ ActiveRecord::Schema.define(version: 20181205093909) do
     t.time "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "financial_planner_id"
+    t.integer "financial_planner_id", null: false
     t.date "reservation_date", null: false
-    t.index ["financial_planner_id"], name: "index_time_frames_on_financial_planner_id"
+    t.index ["financial_planner_id", "reservation_date", "start_time"], name: "index_time_frames_on_financial_planner_id", unique: true
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
