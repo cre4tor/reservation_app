@@ -9,9 +9,9 @@ class TimeFramesController < ApplicationController
     @saturday_start_time_array = []
 
     #平日の開始時刻範囲を設定[10:00~17:30]
-    @weekday_start_time_array = 16.times.map.each_with_index {|i| Tod::TimeOfDay.parse("10:00") + 30.minutes * i}
+    @weekday_start_time_array = 16.times.map {|i| Tod::TimeOfDay.parse("10:00") + 30.minutes * i}
     #土曜日の開始時刻範囲を設定[11:00~14:30]
-    @saturday_start_time_array = 8.times.map.each_with_index {|i| Tod::TimeOfDay.parse("11:00") + 30.minutes * i}
+    @saturday_start_time_array = 8.times.map {|i| Tod::TimeOfDay.parse("11:00") + 30.minutes * i}
   end
 
   def create
