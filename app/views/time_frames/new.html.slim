@@ -10,7 +10,7 @@
 .row
   .col-md-6.col-md-offset-3
     .firstBlock
-      = form_for(@time_frame, url: new_time_frame_path) do |f|
+      = form_for(@time_frame, url: time_frames_path) do |f|
         = f.label '予約日'
         = f.text_field :reservation_date, id: 'weekday'
         | 開始時間
@@ -19,7 +19,7 @@
 .row
   .col-md-6.col-md-offset-3
     .secondBlock
-      = form_for(@time_frame, url: new_time_frame_path) do |f|
+      = form_for(@time_frame, url: time_frames_path) do |f|
         = f.label '予約日'
         = f.text_field :reservation_date, id: 'saturday'
         | 開始時間
