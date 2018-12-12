@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
@@ -29,5 +31,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :email,
                                  :password, :password_confirmation)
   end
-
 end

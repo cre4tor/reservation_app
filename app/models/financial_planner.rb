@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FinancialPlanner < ApplicationRecord
   belongs_to :user
   has_many :time_frames, dependent: :destroy

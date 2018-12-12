@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveTitleFromReservations < ActiveRecord::Migration[5.1]
   def change
     remove_column :reservations, :title, :string

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
@@ -44,12 +46,12 @@ class User < ApplicationRecord
     update_attributes(remember_digest: nil)
   end
 
-  #financial_plannerであればtrue,その他ならfalseを返す
+  # financial_plannerであればtrue,その他ならfalseを返す
   def financial_planner?
     !financial_planner.nil?
   end
 
-  #clientであればtrue,その他ならfalseを返す
+  # clientであればtrue,その他ならfalseを返す
   def client?
     !client.nil?
   end
