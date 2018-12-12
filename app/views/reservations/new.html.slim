@@ -3,17 +3,18 @@ h1
   | Available dates
 ul.reservations
   - @time_frames.each do |time_frame|
-    li
-      .row
-      .col-md-6.col-md-offset-3
-        = time_frame.reservation_date
-        br
-        | 開始時間
-        = time_frame.start_time
-        br
-        | 終了時間
-        = time_frame.end_time
-        br
-        = form_for(@reservation, url: new_reservation_path) do |f|
-          = f.hidden_field :time_frame_id, value: time_frame.id
-          = f.submit 'Reservation', class: 'btn btn-primary'
+    -if time_frame.reservation.nil?
+      li
+        .row
+        .col-md-6.col-md-offset-3
+          = time_frame.reservation_date
+          br
+          | 開始時間
+          = time_frame.start_time
+          br
+          | 終了時間
+          = time_frame.end_time
+          br
+          = form_for(@reservation, url: reservations_path) do |f|
+            = f.hidden_field :time_frame_id, value: time_frame.id
+            = f.submit 'Reservation', class: 'btn btn-primary'
