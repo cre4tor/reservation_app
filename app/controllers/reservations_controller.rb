@@ -10,11 +10,8 @@ class ReservationsController < ApplicationController
     @client = Client.find_by(user_id: @current_user)
     @time_frame = TimeFrame.find_by(id: reservation_params)
     @reservation = @time_frame.build_reservation(client_id: @client)
-
-    binding.pry
     @time_frame.reservation.client_id = @client.id
 
-    binding.pry
     if @reservation.save
       flash[:success] = "Reservation SUCCESS!"
       redirect_to current_user
