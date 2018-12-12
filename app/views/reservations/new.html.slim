@@ -5,15 +5,14 @@ ul.reservations
   - @time_frames.each do |time_frame|
     -if time_frame.reservation.nil?
       li
-        .row
-        .col-md-6.col-md-offset-3
+        .box2
           = time_frame.reservation_date
           br
-          | 開始時間
-          = time_frame.start_time
+          | 開始時間　
+          = time_frame.start_time.strftime('%H:%M')
           br
-          | 終了時間
-          = time_frame.end_time
+          | 終了時間　
+          = time_frame.end_time.strftime('%H:%M')
           br
           = form_for(@reservation, url: reservations_path) do |f|
             = f.hidden_field :time_frame_id, value: time_frame.id
