@@ -71,11 +71,52 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # 重複したメールアドレスなら無効な状態であること
-  it 'is invalid with a duplicate email address' do
-    user = create(:user)
-    another_user = build(:user, email: user.email)
-    another_user.valid?
-    expect(another_user.errors[:email]).to include('has already been taken')
+  # メールアドレスの一意性
+  describe 'email uniqueness' do
+    # 重複したメールアドレスなら無効な状態であること
+    it 'is invalid with a duplicate email address' do
+      user = create(:user)
+      another_user = build(:user, email: user.email)
+      another_user.valid?
+      expect(another_user.errors[:email]).to include('has already been taken')
+    end
+
+    # 大文字と小文字が混在した場合
+    context 'when uppercase-mixed case' do
+      let(:uppercase_mixed_email) { 'FizZ@bUZz.fOO' }
+      # 小文字でDBに保存
+      it 'should be saved as lower-case' do
+        user = build(:user)
+        user.email = uppercase_mixed_email
+        user.save
+        expect(user.reload.email).to eq uppercase_mixed_email.downcase
+      end
+    end
+  end
+
+  # メールアドレスの書式
+  describe 'email format' do
+    # 有効な書式の場合
+    context 'valid format case' do
+      it 'should be valid' do
+        valid_email = %w[hello@world.JP QU_S_-wY@z.c.rb kern.el@fo.us u+x@beze.cvn]
+        valid_email.each do |addr|
+          user = build(:user)
+          user.email = addr
+          expect(user).to be_valid
+        end
+      end
+    end
+    # 無効な書式の場合
+    context 'invalid format case' do
+      it 'should be invalid' do
+        invalid_email = %w[fock@teyp,o hello_world_sa.ppap tutorial.man@oo. foo@bar_bar.org fiz@z+bazz]
+        invalid_email.each do |addr|
+          user = build(:user)
+          user.email = addr
+          expect(user).not_to be_valid
+        end
+      end
+    end
   end
 end
