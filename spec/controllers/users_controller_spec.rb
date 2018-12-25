@@ -20,6 +20,19 @@ RSpec.describe UsersController, type: :controller do
     end
   end
   describe 'GET #new' do
+    before { get :new }
+
+    it 'has a 200 status code' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'assingns new @user' do
+      expect(assigns(:user)).to be_a_new User
+    end
+
+    it 'renders the :new template' do
+      expect(response).to render_template :new
+    end
   end
   describe 'POST #create' do
   end
