@@ -35,5 +35,18 @@ RSpec.describe UsersController, type: :controller do
     end
   end
   describe 'POST #create' do
+    let(:user_attributes) { attributes_for(:user) }
+
+    it 'saves new user' do
+      expect do
+        post :create, params: { user: user_attributes }
+      end.to change(User, :count).by(1)
+    end
+
+    it 'redirects the :create template' do
+      post :create, params: { user: user_attributes }
+      user = User.last
+      expect(response).to redirect_to(user_path(user))
+    end
   end
 end
