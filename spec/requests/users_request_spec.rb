@@ -19,6 +19,7 @@ RSpec.describe UsersController, type: :request do
       expect(response).to render_template :show
     end
   end
+
   describe 'GET #new' do
     before { get :new }
 
@@ -34,6 +35,7 @@ RSpec.describe UsersController, type: :request do
       expect(response).to render_template :new
     end
   end
+
   describe 'POST #create' do
     let(:user_attributes) { attributes_for(:user) }
 
