@@ -2,26 +2,29 @@
 
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :request do
+RSpec.describe 'user page test', type: :request do
   describe 'GET #show' do
     let(:user) { create(:user) }
-    before { get :show, params: { id: user.id } }
+
+    include SessionsHelper
+
+    before do
+      post login_path params: { session: { email: user.email, password: user.password } }
+      current_user.build_financial_planner
+      get user_url user
+    end
 
     it 'has a 200 status code' do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'assingns @user' do
-      expect(assigns(:user)).to eq user
-    end
-
-    it 'renders the :show template' do
-      expect(response).to render_template :show
+    it 'show user name' do
+      expect(response.body).to include "#{user.first_name} #{user.last_name}"
     end
   end
 
   describe 'GET #new' do
-    before { get :new }
+    before { get new_user_url }
 
     it 'has a 200 status code' do
       expect(response).to have_http_status(:ok)
@@ -41,12 +44,12 @@ RSpec.describe UsersController, type: :request do
 
     it 'saves new user' do
       expect do
-        post :create, params: { user: user_attributes }
+        post users_url, params: { user: user_attributes }
       end.to change(User, :count).by(1)
     end
 
     it 'redirects the :create template' do
-      post :create, params: { user: user_attributes }
+      post users_url, params: { user: user_attributes }
       user = User.last
       expect(response).to redirect_to(user_path(user))
     end
