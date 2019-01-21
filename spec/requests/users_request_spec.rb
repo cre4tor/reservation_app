@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'user page test', type: :request do
-  describe 'GET #show' do
+  describe 'GET #show login/logout' do
     let(:user) { create(:user) }
 
     include SessionsHelper
@@ -20,6 +20,11 @@ RSpec.describe 'user page test', type: :request do
 
     it 'show user name' do
       expect(response.body).to include "#{user.first_name} #{user.last_name}"
+    end
+
+    it 'logout' do
+      delete logout_path
+      expect(response).to redirect_to(root_path)
     end
   end
 
