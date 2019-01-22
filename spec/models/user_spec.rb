@@ -122,14 +122,12 @@ RSpec.describe User, type: :model do
 
   # 依存関係
   describe 'user associations' do
-    before do
-      @user = create(:user)
-    end
+    let(:user) { create(:user) }
 
     context 'financial_planner case' do
       it 'should have the right associated user' do
-        financial_planner = @user.build_financial_planner
-        financial_planner.user_id == @user.id
+        financial_planner = user.build_financial_planner
+        financial_planner.user_id == user.id
       end
 
       it 'should have [has_one] association' do
@@ -139,8 +137,8 @@ RSpec.describe User, type: :model do
 
     context 'client case' do
       it 'should have the right associated user' do
-        client = @user.build_client
-        client.user_id == @user.id
+        client = user.build_client
+        client.user_id == user.id
       end
 
       it 'should have [has_one] association' do
