@@ -4,27 +4,41 @@ require 'rails_helper'
 
 RSpec.describe 'user page test', type: :request do
   describe 'GET #show login/logout' do
-    let(:user) { create(:user) }
-
     include SessionsHelper
 
-    before do
-      post login_path params: { session: { email: user.email, password: user.password } }
-      current_user.build_financial_planner
-      get user_url user
+    shared_context 'login' do
+      let(:user) { create(:user) }
+      before { post login_path params: { session: { email: user.email, password: user.password } } }
     end
 
-    it 'has a 200 status code' do
-      expect(response).to have_http_status(:ok)
+    shared_context 'get show page' do
+      before { get user_url user }
     end
 
-    it 'show user name' do
-      expect(response.body).to include "#{user.first_name} #{user.last_name}"
+    context 'session test' do
+      include_context 'login'
+
+      it 'login' do
+        expect(response).to redirect_to(user)
+      end
+
+      it 'logout' do
+        delete logout_path
+        expect(response).to redirect_to(root_path)
+      end
     end
 
-    it 'logout' do
-      delete logout_path
-      expect(response).to redirect_to(root_path)
+    context 'show page test' do
+      include_context 'login'
+      include_context 'get show page'
+
+      it 'has a 200 status code' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'show user name' do
+        expect(response.body).to include "#{user.first_name} #{user.last_name}"
+      end
     end
   end
 
