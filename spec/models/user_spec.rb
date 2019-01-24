@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # 存在性の検証
-  describe 'presence' do
+  # 検証
+  describe 'validations' do
     # 姓、名、メール、パスワードがあれば有効な状態であること
     it 'is valid with a first name, last name, email, and password' do
       user = build(:user)
