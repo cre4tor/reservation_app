@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Reservation, type: :model do
+RSpec.describe TimeFrame, type: :model do
   # Reservation 依存関係
   describe 'client associations' do
     # association targets

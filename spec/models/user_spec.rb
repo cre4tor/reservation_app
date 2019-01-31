@@ -37,25 +37,25 @@ RSpec.describe User, type: :model do
     # パスワードが文字数制限を下回れば無効な状態であること
     it 'is invalid if password falls below the characters limit' do
       user = build(:user, password: '00000')
-      expect{ user.valid? }.to change{ user.errors[:password] }.from([]).to(['is too short (minimum is 6 characters)'])
+      expect { user.valid? }.to change { user.errors[:password] }.from([]).to(['is too short (minimum is 6 characters)'])
     end
 
     # 姓が文字数制限を超えれば無効な状態であること
     it 'is invalid if first name exceeds the characters limit' do
       user = build(:user, first_name: 'a' * 16)
-      expect{ user.valid? }.to change{ user.errors[:first_name] }.from([]).to(['is too long (maximum is 15 characters)'])
+      expect { user.valid? }.to change { user.errors[:first_name] }.from([]).to(['is too long (maximum is 15 characters)'])
     end
 
     # 名が文字数制限を超えれば無効な状態であること
     it 'is invalid if last name exceeds the characters limit' do
       user = build(:user, last_name: 'a' * 16)
-      expect{ user.valid? }.to change{ user.errors[:last_name] }.from([]).to(['is too long (maximum is 15 characters)'])
+      expect { user.valid? }.to change { user.errors[:last_name] }.from([]).to(['is too long (maximum is 15 characters)'])
     end
 
     # emailが文字数制限を超えれば無効な状態であること
     it 'is invalid if email exceeds the characters limit' do
       user = build(:user, email: 'a' * 252 + '@a.a')
-      expect{ user.valid? }.to change{ user.errors[:email] }.from([]).to(['is too long (maximum is 255 characters)'])
+      expect { user.valid? }.to change { user.errors[:email] }.from([]).to(['is too long (maximum is 255 characters)'])
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
     it 'is invalid with a duplicate email address' do
       user = create(:user)
       another_user = build(:user, email: user.email)
-      expect{ another_user.valid? }.to change{ another_user.errors[:email] }.from([]).to(['has already been taken'])
+      expect { another_user.valid? }.to change { another_user.errors[:email] }.from([]).to(['has already been taken'])
     end
 
     # 大文字と小文字が混在した場合
