@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe 'time_frame page test', type: :request do
   describe 'GET #new' do
-    let(:user) { create(:user) }
-
-    include SessionsHelper
+    let(:user) { create(:user, :with_fp) }
 
     before do
       post login_path params: { session: { email: user.email, password: user.password } }
-      get user_url user
+      get '/time_frames/new'
     end
 
     it 'has a 200 status code' do
@@ -20,12 +19,9 @@ RSpec.describe 'time_frame page test', type: :request do
 
   describe 'POST #create' do
     let(:user) { create(:user, :with_fp) }
-    let(:time_frame_attributes) { attributes_for(:time_frame) }
+    let(:time_frame_attributes) { attributes_for(:time_frame, :post) }
 
-    before do
-      post login_path params: { session: { email: user.email, password: user.password } }
-      get user_url user
-    end
+    before { post login_path params: { session: { email: user.email, password: user.password } } }
 
     it 'saves new time_frame' do
       expect do
@@ -33,10 +29,17 @@ RSpec.describe 'time_frame page test', type: :request do
       end.to change(TimeFrame, :count).by(1)
     end
 
+    include SessionsHelper
+
     it 'redirects the :create template' do
       post time_frames_url, params: { time_frame: time_frame_attributes }
-      user = User.last
+      user = current_user
       expect(response).to redirect_to(user_path(user))
+    end
+
+    it 'flash[:success] message is not empty' do
+      post time_frames_url, params: { time_frame: time_frame_attributes }
+      expect(flash[:success]).not_to be_empty
     end
   end
 end
