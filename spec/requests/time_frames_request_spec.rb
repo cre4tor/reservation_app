@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe 'time_frame page test', type: :request do
   describe 'GET #new' do
