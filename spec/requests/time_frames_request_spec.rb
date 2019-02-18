@@ -5,16 +5,12 @@ require 'pry'
 
 RSpec.describe 'time_frame page test', type: :request do
   describe 'GET #new' do
+    subject(:response) { get new_time_frame_path }
     let(:user) { create(:user, :with_fp) }
 
-    before do
-      post login_path params: { session: { email: user.email, password: user.password } }
-      subject { get new_time_frame_path }
-    end
+    before { post login_path params: { session: { email: user.email, password: user.password } } }
 
-    it 'has a 200 status code' do
-      expect(subject.status).to have_http_status(:ok)
-    end
+    it { is_expected.to eq 200 }
   end
 
   describe 'POST #create' do

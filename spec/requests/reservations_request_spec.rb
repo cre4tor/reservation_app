@@ -4,16 +4,12 @@ require 'rails_helper'
 
 RSpec.describe 'reservation page test', type: :request do
   describe 'GET #new' do
+    subject(:response) { get new_reservation_path }
     let(:user) { create(:user, :with_client) }
 
-    before do
-      post login_path params: { session: { email: user.email, password: user.password } }
-      subject { get new_reservation_path }
-    end
+    before { post login_path params: { session: { email: user.email, password: user.password } } }
 
-    it 'has a 200 status code' do
-      expect(response).to have_http_status(:ok)
-    end
+    it { is_expected.to eq 200 }
   end
 
   describe 'POST #create' do
