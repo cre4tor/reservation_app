@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-client_id = 1
-time_frame_id = 1
-
 FactoryBot.define do
   factory :time_frame do
     reservation_date '2019-05-01'
@@ -31,6 +28,7 @@ FactoryBot.define do
     end
 
     trait :with_client do
+      client_id = 1
       after(:build) do |user|
         client = user.build_client
         client.id = client_id
@@ -39,6 +37,7 @@ FactoryBot.define do
     end
 
     trait :with_time_frame do
+      time_frame_id = 1
       after(:build) do |user|
         fp = user.build_financial_planner
         fp.id = time_frame_id
