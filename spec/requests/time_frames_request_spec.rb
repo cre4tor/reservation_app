@@ -9,7 +9,7 @@ RSpec.describe 'time_frame page test', type: :request do
 
     before do
       post login_path params: { session: { email: user.email, password: user.password } }
-      get new_time_frame_path
+      subject { get new_time_frame_path }
     end
 
     it 'has a 200 status code' do

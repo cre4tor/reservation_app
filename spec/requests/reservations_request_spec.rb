@@ -8,7 +8,7 @@ RSpec.describe 'reservation page test', type: :request do
 
     before do
       post login_path params: { session: { email: user.email, password: user.password } }
-      get new_reservation_path
+      subject { get new_reservation_path }
     end
 
     it 'has a 200 status code' do
