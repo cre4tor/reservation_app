@@ -19,9 +19,7 @@ RSpec.describe 'reservation page test', type: :request do
     end
     let(:client) { create(:user, :with_client) }
 
-    before do
-      post login_path params: { session: { email: client.email, password: client.password } }
-    end
+    before { post login_path, params: { session: { email: client.email, password: client.password } } }
 
     it { expect { subject }.to change(Reservation, :count).by(1) }
 
