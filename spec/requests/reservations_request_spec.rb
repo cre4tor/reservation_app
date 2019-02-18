@@ -8,7 +8,7 @@ RSpec.describe 'reservation page test', type: :request do
 
     before do
       post login_path params: { session: { email: user.email, password: user.password } }
-      get '/reservations/new'
+      get new_reservation_path
     end
 
     it 'has a 200 status code' do
@@ -21,7 +21,7 @@ RSpec.describe 'reservation page test', type: :request do
 
     before { post login_path params: { session: { email: client.email, password: client.password } } }
 
-    it 'saves new time_frame' do
+    it 'is saved new time_frame' do
       create(:user, :with_time_frame)
       expect do
         post reservations_path, params: { reservation: { time_frame_id: 1 } }
@@ -30,17 +30,17 @@ RSpec.describe 'reservation page test', type: :request do
 
     include SessionsHelper
 
-    it 'redirects the :create template' do
+    it 'is redirecting to the create template page' do
       create(:user, :with_time_frame)
       post reservations_path, params: { reservation: { time_frame_id: 2 } }
       user = current_user
       expect(response).to redirect_to(user_path(user))
     end
 
-    it 'flash[:success] message is not empty' do
+    it 'is flash[:success] message is assumed' do
       create(:user, :with_time_frame)
       post reservations_path, params: { reservation: { time_frame_id: 3 } }
-      expect(flash[:success]).not_to be_empty
+      expect(flash[:success]).to eq 'Reservation SUCCESS!'
     end
   end
 end
