@@ -13,7 +13,7 @@ RSpec.describe 'time_frame page test', type: :request do
     end
 
     it 'has a 200 status code' do
-      expect(response).to have_http_status(:ok)
+      expect(subject.status).to have_http_status(:ok)
     end
   end
 

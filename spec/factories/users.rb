@@ -23,28 +23,21 @@ FactoryBot.define do
 
     trait :with_fp do
       after(:build) do |user|
-        user.build_financial_planner
+        user.build_financial_planner(id: user.id)
       end
     end
 
     trait :with_client do
-      client_id = 1
       after(:build) do |user|
-        client = user.build_client
-        client.id = client_id
-        client_id += 1
+        user.build_client(id: user.id)
       end
     end
 
     trait :with_time_frame do
-      time_frame_id = 1
       after(:build) do |user|
-        fp = user.build_financial_planner
-        fp.id = time_frame_id
+        fp = user.build_financial_planner(id: user.id)
         attr = attributes_for(:time_frame, :generate)
-        tf = fp.time_frames.new(attr)
-        tf.id = time_frame_id
-        time_frame_id += 1
+        fp.time_frames.new(attr.merge(id: fp.id))
       end
     end
   end
