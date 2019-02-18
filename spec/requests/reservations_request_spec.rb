@@ -24,7 +24,7 @@ RSpec.describe 'reservation page test', type: :request do
     it 'saves new time_frame' do
       create(:user, :with_time_frame)
       expect do
-        post reservations_url, params: { reservation: { time_frame_id: 1 } }
+        post reservations_path, params: { reservation: { time_frame_id: 1 } }
       end.to change(Reservation, :count).by(1)
     end
 
@@ -32,14 +32,14 @@ RSpec.describe 'reservation page test', type: :request do
 
     it 'redirects the :create template' do
       create(:user, :with_time_frame)
-      post reservations_url, params: { reservation: { time_frame_id: 2 } }
+      post reservations_path, params: { reservation: { time_frame_id: 2 } }
       user = current_user
       expect(response).to redirect_to(user_path(user))
     end
 
     it 'flash[:success] message is not empty' do
       create(:user, :with_time_frame)
-      post reservations_url, params: { reservation: { time_frame_id: 3 } }
+      post reservations_path, params: { reservation: { time_frame_id: 3 } }
       expect(flash[:success]).not_to be_empty
     end
   end
