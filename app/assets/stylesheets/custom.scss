@@ -14,7 +14,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 section {
@@ -308,4 +308,10 @@ span.picture {
   background: #000000;
   border: solid 3px #90F010;/*線*/
   border-radius: 10px;/*角の丸み*/
+}
+
+/* navbar 全体の背景色とボーダーカラー */
+.navbar-default {
+  background-color: #ff9100;
+  border-color: #2f6300;
 }

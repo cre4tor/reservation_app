@@ -13,29 +13,26 @@ RSpec.describe 'reservation page test', type: :request do
   end
 
   describe 'POST #create' do
+    subject(:action) do
+      tf = create(:user, :with_time_frame)
+      post reservations_path, params: { reservation: { time_frame_id: tf.id } }
+    end
     let(:client) { create(:user, :with_client) }
 
-    before { post login_path params: { session: { email: client.email, password: client.password } } }
+    before { post login_path, params: { session: { email: client.email, password: client.password } } }
 
-    it 'is saved new time_frame' do
-      tf = create(:user, :with_time_frame)
-      expect do
-        post reservations_path, params: { reservation: { time_frame_id: tf.id } }
-      end.to change(Reservation, :count).by(1)
-    end
+    it { expect { subject }.to change(Reservation, :count).by(1) }
 
     include SessionsHelper
 
     it 'is redirecting to the create template page' do
-      tf = create(:user, :with_time_frame)
-      post reservations_path, params: { reservation: { time_frame_id: tf.id } }
+      subject
       user = current_user
       expect(response).to redirect_to(user_path(user))
     end
 
     it 'is flash[:success] message is assumed' do
-      tf = create(:user, :with_time_frame)
-      post reservations_path, params: { reservation: { time_frame_id: tf.id } }
+      subject
       expect(flash[:success]).to eq 'Reservation SUCCESS!'
     end
   end
