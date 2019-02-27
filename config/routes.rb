@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   post '/time_frames/new', to: 'time_frames#create'
+  post '/reservations/new', to: 'reservations#create'
   resources :users
   resources :time_frames
+  resources :reservations
 end
