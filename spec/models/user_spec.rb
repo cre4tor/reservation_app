@@ -122,24 +122,27 @@ RSpec.describe User, type: :model do
 
   # 依存関係
   describe 'user associations' do
-    # 1:1の依存関係
-    describe 'has_one' do
-      before do
-        @user = create(:user)
+    let(:user) { create(:user) }
+
+    context 'financial_planner case' do
+      it 'should have the right associated user' do
+        financial_planner = user.build_financial_planner
+        financial_planner.user_id == user.id
       end
 
-      context 'financial_planner case' do
-        it 'should have the right associated user' do
-          financial_planner = @user.build_financial_planner
-          financial_planner.user_id == @user.id
-        end
+      it 'should have [has_one] association' do
+        should have_one(:financial_planner)
+      end
+    end
+
+    context 'client case' do
+      it 'should have the right associated user' do
+        client = user.build_client
+        client.user_id == user.id
       end
 
-      context 'client case' do
-        it 'should have the right associated user' do
-          client = @user.build_client
-          client.user_id == @user.id
-        end
+      it 'should have [has_one] association' do
+        should have_one(:client)
       end
     end
   end
