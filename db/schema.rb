@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20181205093909) do
   end
 
   create_table "time_frames", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.time "start_time"
-    t.time "end_time"
+    t.time "start_time", null: false
+    t.time "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "financial_planner_id"
-    t.date "reservation_date"
+    t.date "reservation_date", null: false
     t.index ["financial_planner_id"], name: "index_time_frames_on_financial_planner_id"
   end
 
