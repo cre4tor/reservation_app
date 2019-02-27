@@ -1,6 +1,0 @@
-.row
-  aside.col-md-4
-    section.user_info
-      = render 'user_info'
-  - if current_user.financial_planner?
-    = link_to "Create ReservationFrame", new_time_frame_path, class: "btn btn-lg btn-primary"
