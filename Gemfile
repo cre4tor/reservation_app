@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -8,6 +10,18 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+# install jquery
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+# Use DateTimePicker
+gem 'bootstrap3-datetimepicker-rails'
+gem 'momentjs-rails', '~> 2.9', github: 'derekprior/momentjs-rails'
+# Use TimeOfDay
+gem 'tod'
+# Use bootstrap
+gem 'bootstrap-sass', '3.3.7'
+# Use slim
+gem 'slim-rails', '3.1.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
@@ -35,7 +49,10 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-rails'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'

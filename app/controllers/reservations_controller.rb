@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# This class has client side reservation function
 class ReservationsController < ApplicationController
-  before_action :logged_in_client, only: [:new, :create]
+  before_action :logged_in_client, only: %i[new create]
 
   def new
     @time_frames = TimeFrame.all.order(:start_time, :reservation_date)
@@ -7,38 +10,27 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @client = Client.find_by(user_id: @current_user)
-    @time_frame = TimeFrame.find_by(id: reservation_params)
-    @reservation = @time_frame.build_reservation(client_id: @client)
+    client = current_user.client
+    time_frame = TimeFrame.find(time_frame_id_param)
+    reservation = time_frame.build_reservation(client: client)
 
-    binding.pry
-    @time_frame.reservation.client_id = @client.id
+    time_frame.reservation.client_id = client.id
 
-    binding.pry
-    if @reservation.save
-      flash[:success] = "Reservation SUCCESS!"
-      redirect_to current_user
+    if reservation.save
+      redirect_to @current_user, flash: { success: 'Reservation SUCCESS!' }
     else
-      flash[:danger] = "Reservation failed..."
-      redirect_to new_reservation_path
+      redirect_to new_reservation_path, flash: { danger: 'Reservation failed...' }
     end
   end
 
   def logged_in_client
-    unless logged_in?
-      flash[:danger] = "Please log in"
-      redirect_to login_url
-    end
-    unless current_user.client?
-      flash[:danger] = "Permission denied"
-      redirect_to @current_user
-    end
+    redirect_to login_url, flash: { danger: 'Please log in' } unless logged_in?
+    redirect_to @current_user, flash: { danger: 'Permission denied' } unless current_user.client?
   end
 
   private
 
-    def reservation_params
-      param = params.require(:reservation).permit(:time_frame_id).to_s
-      param.delete("^0-9").to_i
-    end
+  def time_frame_id_param
+    params.require(:reservation).permit(:time_frame_id)[:time_frame_id]
+  end
 end

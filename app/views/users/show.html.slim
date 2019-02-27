@@ -1,0 +1,49 @@
+- provide(:title, "#{@user.first_name} #{@user.last_name}")
+.row
+  aside.col-md-4
+    section.user_info
+      h1
+        = "#{@user.first_name } #{@user.last_name}"
+      br
+      - if current_user.financial_planner?
+        - @time_frames.each do |time_frame|
+          -if time_frame.financial_planner_id == @current_user.financial_planner.id
+            -if time_frame.reservation.nil?
+              .box2
+                | 予約なし
+                br
+                = time_frame.reservation_date
+                br
+                | 開始時間　
+                = time_frame.start_time.strftime('%H:%M')
+                br
+                | 終了時間　
+                = time_frame.end_time.strftime('%H:%M')
+                br
+            -else
+              .box3
+                | 予約済み
+                br
+                = time_frame.reservation_date
+                br
+                | 開始時間　
+                = time_frame.start_time.strftime('%H:%M')
+                br
+                | 終了時間　
+                = time_frame.end_time.strftime('%H:%M')
+                br
+
+      - if current_user.client?
+        - @time_frames.each do |time_frame|
+          -if !time_frame.reservation.nil?
+            -if time_frame.reservation.client_id == @current_user.client.id
+              .box3
+                | 予約済み
+                = time_frame.reservation_date
+                br
+                | 開始時間　
+                = time_frame.start_time.strftime('%H:%M')
+                br
+                | 終了時間　
+                = time_frame.end_time.strftime('%H:%M')
+                br
